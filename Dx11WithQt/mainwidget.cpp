@@ -1,6 +1,8 @@
 #include "mainwidget.h"
 #include "d3d11renderwidget.h"
 #include "GraphicViewer.h"
+#include <QDockWidget>
+#include <QTextEdit>
 #include <qboxlayout.h>
 
 MainWidget::MainWidget(QWidget *parent)
@@ -45,6 +47,33 @@ MainWidget::MainWidget(QWidget *parent)
 	
 
 	setCentralWidget(view);
+
+	//=================test dock
+//http://blog.csdn.net/x_iya/article/details/17200887
+//http://blog.csdn.net/x_iya/article/details/17253403
+	QDockWidget *dock = new QDockWidget("Dock Window1", this);
+	dock->setFeatures(QDockWidget::DockWidgetMovable);
+	dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	QTextEdit *te1 = new QTextEdit;
+	te1->setText("Dock Window1");
+	dock->setWidget(te1);
+	addDockWidget(Qt::RightDockWidgetArea, dock);
+
+	dock = new QDockWidget("Dock Window2", this);
+	dock->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetFloatable);
+	QTextEdit *te2 = new QTextEdit;
+	te2->setText("Dock Window2");
+	dock->setWidget(te2);
+	addDockWidget(Qt::RightDockWidgetArea, dock);
+
+	dock = new QDockWidget("Dock Window3", this);
+	dock->setFeatures(QDockWidget::AllDockWidgetFeatures);
+	QTextEdit *te3 = new QTextEdit;
+	te3->setText("Dock Windo3");
+	dock->setWidget(te3);
+	addDockWidget(Qt::RightDockWidgetArea, dock);
+
+	this->resize(QSize(1024, 768));
 }
 
 MainWidget::~MainWidget()
