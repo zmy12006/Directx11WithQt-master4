@@ -1,3 +1,4 @@
+#include <string>
 #include "Common.h"
 #include "DX11Render.h"
 
@@ -48,7 +49,7 @@ bool DX11Render::InitialDevice()
 
 
 #if defined(DEBUG) || defined(_DEBUG)
-	QString level(QStringLiteral("Unkown"));
+	std::string level(("Unkown"));
 	switch (curLevel)
 	{
 	case D3D_FEATURE_LEVEL_11_0:

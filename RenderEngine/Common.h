@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QWidget>
+//#include <QWidget>
 
 //包含D3D相关的头文件
 #include <d3d11.h>
