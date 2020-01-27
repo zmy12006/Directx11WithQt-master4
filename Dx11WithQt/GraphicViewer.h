@@ -13,7 +13,7 @@
 
 #include "Common.h"
 
-class Scene;
+class DX11Render;
 class GraphicViewer : public QWidget
 {
 	Q_OBJECT
@@ -26,7 +26,7 @@ public:
 		return NULL;
 	}
 
-	bool Initial(Scene* s);
+	bool Initial(DX11Render* s);
 
 private:
 	//重写虚函数
@@ -48,7 +48,7 @@ private:
 	void CleanUp();     //释放资源
 
 private:
-	Scene* mScene;
+	DX11Render* mScene;
 
 
 private:

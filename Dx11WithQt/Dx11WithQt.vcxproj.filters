@@ -59,9 +59,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_d3d11renderwidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GraphicViewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -70,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_GraphicViewer.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11Render.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,10 +93,10 @@
     <ClInclude Include="GeneratedFiles\ui_mainwidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
+    <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
+    <ClInclude Include="DX11Render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,11 +11,11 @@
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
 #include <DirectXCollision.h>
-class Scene
+class DX11Render
 {
 public:
-	Scene();
-	~Scene();
+	DX11Render();
+	~DX11Render();
 
 	bool InitialDevice();
 

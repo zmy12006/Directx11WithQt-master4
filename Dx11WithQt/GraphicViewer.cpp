@@ -1,7 +1,7 @@
 #include <QDebug>
 #include <QKeyEvent>
 #include <d3dcompiler.h>
-#include "Scene.h"
+#include "DX11Render.h"
 #include "GraphicViewer.h"
 
 
@@ -38,7 +38,7 @@ GraphicViewer::~GraphicViewer()
 }
 
 
-bool GraphicViewer::Initial(Scene* s)
+bool GraphicViewer::Initial(DX11Render* s)
 {
 	mScene = s;
 

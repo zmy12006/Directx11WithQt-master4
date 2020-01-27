@@ -3,7 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwidget.h"
-#include "Scene.h"
+#include "DX11Render.h"
 class MainWidget : public QMainWindow
 {
 	Q_OBJECT
@@ -14,7 +14,7 @@ public:
 
 private:
 	Ui::MainWidgetClass ui;
-	Scene mScene;
+	DX11Render mScene;
 };
 
 #endif // MAINWIDGET_H

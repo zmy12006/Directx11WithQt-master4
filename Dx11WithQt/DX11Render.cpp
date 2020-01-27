@@ -1,20 +1,20 @@
 #include "Common.h"
-#include "Scene.h"
+#include "DX11Render.h"
 
 
-Scene::Scene()
+DX11Render::DX11Render()
 {
 	m_qualityLevel = 0;
 }
 
 
-Scene::~Scene()
+DX11Render::~DX11Render()
 {
 	SAFE_RELEASE(m_pD3dDevice);
 	SAFE_RELEASE(m_pDeviceContext);
 }
 
-bool Scene::InitialDevice()
+bool DX11Render::InitialDevice()
 {
 	HRESULT	hr;
 
