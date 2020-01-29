@@ -154,10 +154,30 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="DX11Render.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Math\CollisionHelper.h" />
+    <ClInclude Include="Math\MathUtility.h" />
+    <ClInclude Include="Math\Misc.h" />
+    <ClInclude Include="Math\QuaternionEx.h" />
+    <ClInclude Include="Math\SimpleMath.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Spatial.h" />
+    <ClInclude Include="ViewPort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX11Render.cpp" />
+    <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Math\CollisionHelper.cpp" />
+    <ClCompile Include="Math\QuaternionEx.cpp" />
+    <ClCompile Include="Math\SimpleMath.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -165,6 +185,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RenderEngine.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Spatial.cpp" />
+    <ClCompile Include="ViewPort.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

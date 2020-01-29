@@ -3,7 +3,8 @@
 #include <d3d11.h>
 // #include <d3dx11.h>
 // #include <d3dx10.h>
-// #include <xnamath.h>#include <functional>
+// #include <xnamath.h>
+#include <functional>
 #include <assert.h>
 #include <memory.h>
 
@@ -11,6 +12,7 @@
 #include <DirectXPackedVector.h>
 #include <DirectXCollision.h>
 
+#include "ViewPort.h"
 #include "Common.h"
 
 class DX11Render;
@@ -50,15 +52,16 @@ private:
 private:
 	DX11Render* mScene;
 
+	ViewPort	mViewPort;
 
 private:
 	//D3D相关的变量
 	ID3D11Device *m_d3dDevice;
 	ID3D11DeviceContext *m_d3dDevContext;
-	IDXGISwapChain *m_swapChain;
-	ID3D11Texture2D *m_depthStencilBuffer;
-	ID3D11DepthStencilView *m_depthStencilView;
-	ID3D11RenderTargetView *m_renderTargetView;
+	//IDXGISwapChain *m_swapChain;
+	//ID3D11Texture2D *m_depthStencilBuffer;
+	//ID3D11DepthStencilView *m_depthStencilView;
+	//ID3D11RenderTargetView *m_renderTargetView;
 	ID3D11RasterizerState *m_rasterizeState;
 
 	ID3D11Buffer *m_squareVertexBuffer;

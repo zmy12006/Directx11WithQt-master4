@@ -8,10 +8,10 @@
 GraphicViewer::GraphicViewer(QWidget* parent) : QWidget(parent),
 m_d3dDevice(0),
 m_d3dDevContext(0),
-m_swapChain(0),
-m_depthStencilBuffer(0),
-m_depthStencilView(0),
-m_renderTargetView(0),
+//m_swapChain(0),
+//m_depthStencilBuffer(0),
+//m_depthStencilView(0),
+//m_renderTargetView(0),
 m_rasterizeState(0),
 m_squareVertexBuffer(0),
 m_squareIndiceBuffer(0),
@@ -45,54 +45,56 @@ bool GraphicViewer::Initial(DX11Render* s)
 	m_d3dDevice = s->getDevice();
 	m_d3dDevContext = s->getDeviceContex();
 
-	HRESULT	hr;
-	DXGI_SWAP_CHAIN_DESC scDesc = { 0 };
-	scDesc.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
-	//scDesc.BufferDesc.Width = iWindowsWidth;
-	//scDesc.BufferDesc.Height = iWindowHeight;
-	scDesc.BufferDesc.RefreshRate.Numerator = 60;
-	scDesc.BufferDesc.RefreshRate.Denominator = 1;
-	scDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-	scDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	scDesc.BufferCount = 1;
-	scDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	scDesc.Flags = 0;
-	scDesc.OutputWindow = (HWND)winId();
-	scDesc.SampleDesc.Count = mScene->getQualityLevel() <= 1 ? 1 : 4;
-	scDesc.SampleDesc.Quality = mScene->getQualityLevel() <= 1 ? 0 : mScene->getQualityLevel() - 1;
-	scDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	scDesc.Windowed = true;
+	//HRESULT	hr;
+	//DXGI_SWAP_CHAIN_DESC scDesc = { 0 };
+	//scDesc.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	////scDesc.BufferDesc.Width = iWindowsWidth;
+	////scDesc.BufferDesc.Height = iWindowHeight;
+	//scDesc.BufferDesc.RefreshRate.Numerator = 60;
+	//scDesc.BufferDesc.RefreshRate.Denominator = 1;
+	//scDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+	//scDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+	//scDesc.BufferCount = 1;
+	//scDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	//scDesc.Flags = 0;
+	//scDesc.OutputWindow = (HWND)winId();
+	//scDesc.SampleDesc.Count = mScene->getQualityLevel() <= 1 ? 1 : 4;
+	//scDesc.SampleDesc.Quality = mScene->getQualityLevel() <= 1 ? 0 : mScene->getQualityLevel() - 1;
+	//scDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	//scDesc.Windowed = true;
 
-	IDXGIDevice *pDxgiDevice(NULL);
-	hr = mScene->getDevice()->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(&pDxgiDevice));
-	if (FAILED(hr))
-	{
-		qDebug() << "Get DXGIDevice failed!";
-		return false;
-	}
-	IDXGIAdapter *pDxgiAdapter(NULL);
-	hr = pDxgiDevice->GetParent(__uuidof(IDXGIAdapter), reinterpret_cast<void**>(&pDxgiAdapter));
-	if (FAILED(hr))
-	{
-		qDebug() << "Get DXGIAdapter failed!";
-		return false;
-	}
-	IDXGIFactory *pDxgiFactory(NULL);
-	hr = pDxgiAdapter->GetParent(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&pDxgiFactory));
-	if (FAILED(hr))
-	{
-		qDebug() << "Get DXGIFactory failed!";
-		return false;
-	}
-	hr = pDxgiFactory->CreateSwapChain(mScene->getDevice(), &scDesc, &m_swapChain);
-	if (FAILED(hr))
-	{
-		qDebug() << "Create swap chain failed!";
-		return false;
-	}
-	SafeRelease(pDxgiFactory);
-	SafeRelease(pDxgiAdapter);
-	SafeRelease(pDxgiDevice);
+	//IDXGIDevice *pDxgiDevice(NULL);
+	//hr = mScene->getDevice()->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(&pDxgiDevice));
+	//if (FAILED(hr))
+	//{
+	//	qDebug() << "Get DXGIDevice failed!";
+	//	return false;
+	//}
+	//IDXGIAdapter *pDxgiAdapter(NULL);
+	//hr = pDxgiDevice->GetParent(__uuidof(IDXGIAdapter), reinterpret_cast<void**>(&pDxgiAdapter));
+	//if (FAILED(hr))
+	//{
+	//	qDebug() << "Get DXGIAdapter failed!";
+	//	return false;
+	//}
+	//IDXGIFactory *pDxgiFactory(NULL);
+	//hr = pDxgiAdapter->GetParent(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&pDxgiFactory));
+	//if (FAILED(hr))
+	//{
+	//	qDebug() << "Get DXGIFactory failed!";
+	//	return false;
+	//}
+	//hr = pDxgiFactory->CreateSwapChain(mScene->getDevice(), &scDesc, &m_swapChain);
+	//if (FAILED(hr))
+	//{
+	//	qDebug() << "Create swap chain failed!";
+	//	return false;
+	//}
+	//SafeRelease(pDxgiFactory);
+	//SafeRelease(pDxgiAdapter);
+	//SafeRelease(pDxgiDevice);
+
+	mViewPort.Initial(s, (HWND)winId());
 
 	//ResizeTextureSize(hwnd, iWindowsWidth, iWindowHeight);
 	//ResizeWindowSize(hwnd, iWindowsWidth, iWindowHeight);
@@ -104,56 +106,58 @@ void GraphicViewer::resizeEvent(QResizeEvent *event)
 {
 	//当窗口尺寸变化时，必须重新设置帧缓存、深度缓存、模板缓存、视口
 
-	SAFE_RELEASE(m_renderTargetView);
-	SAFE_RELEASE(m_depthStencilView);
-	SAFE_RELEASE(m_depthStencilBuffer);
+	mViewPort.Resize(width(), height());
 
-	HRESULT hr;
-	m_swapChain->ResizeBuffers(1, width(), height(), DXGI_FORMAT_R8G8B8A8_UNORM, 0);
-	//Create our BackBuffer
-	ID3D11Texture2D* backBuffer;
-	m_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
+	//SAFE_RELEASE(m_renderTargetView);
+	//SAFE_RELEASE(m_depthStencilView);
+	//SAFE_RELEASE(m_depthStencilBuffer);
 
-	//Create our Render Target
-	hr = m_d3dDevice->CreateRenderTargetView(backBuffer, NULL, &m_renderTargetView);
-	SAFE_RELEASE(backBuffer);
+	//HRESULT hr;
+	//m_swapChain->ResizeBuffers(1, width(), height(), DXGI_FORMAT_R8G8B8A8_UNORM, 0);
+	////Create our BackBuffer
+	//ID3D11Texture2D* backBuffer;
+	//m_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
 
-	//Describe our Depth/Stencil Buffer
-	D3D11_TEXTURE2D_DESC depthStencilDesc;
+	////Create our Render Target
+	//hr = m_d3dDevice->CreateRenderTargetView(backBuffer, NULL, &m_renderTargetView);
+	//SAFE_RELEASE(backBuffer);
 
-	depthStencilDesc.Width = width();
-	depthStencilDesc.Height = height();
-	depthStencilDesc.MipLevels = 1;
-	depthStencilDesc.ArraySize = 1;
-	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	depthStencilDesc.SampleDesc.Count = 1;
-	depthStencilDesc.SampleDesc.Quality = 0;
-	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
-	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	depthStencilDesc.CPUAccessFlags = 0;
-	depthStencilDesc.MiscFlags = 0;
+	////Describe our Depth/Stencil Buffer
+	//D3D11_TEXTURE2D_DESC depthStencilDesc;
 
-	//Create the Depth/Stencil View
-	m_d3dDevice->CreateTexture2D(&depthStencilDesc, NULL, &m_depthStencilBuffer);
-	m_d3dDevice->CreateDepthStencilView(m_depthStencilBuffer, NULL, &m_depthStencilView);
+	//depthStencilDesc.Width = width();
+	//depthStencilDesc.Height = height();
+	//depthStencilDesc.MipLevels = 1;
+	//depthStencilDesc.ArraySize = 1;
+	//depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	//depthStencilDesc.SampleDesc.Count = 1;
+	//depthStencilDesc.SampleDesc.Quality = 0;
+	//depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+	//depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	//depthStencilDesc.CPUAccessFlags = 0;
+	//depthStencilDesc.MiscFlags = 0;
 
-	//Set our Render Target
-	m_d3dDevContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
+	////Create the Depth/Stencil View
+	//m_d3dDevice->CreateTexture2D(&depthStencilDesc, NULL, &m_depthStencilBuffer);
+	//m_d3dDevice->CreateDepthStencilView(m_depthStencilBuffer, NULL, &m_depthStencilView);
 
-	//Create the Viewport
-	D3D11_VIEWPORT viewport;
-	ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
+	////Set our Render Target
+	//m_d3dDevContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
 
-	viewport.TopLeftX = 0;
-	viewport.TopLeftY = 0;
-	viewport.Width = width();
-	viewport.Height = height();
-	viewport.MinDepth = 0.0f;
-	viewport.MaxDepth = 1.0f;
+	////Create the Viewport
+	//D3D11_VIEWPORT viewport;
+	//ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
 
-	m_viewport = viewport;
-	//Set the Viewport
-	m_d3dDevContext->RSSetViewports(1, &viewport);
+	//viewport.TopLeftX = 0;
+	//viewport.TopLeftY = 0;
+	//viewport.Width = width();
+	//viewport.Height = height();
+	//viewport.MinDepth = 0.0f;
+	//viewport.MaxDepth = 1.0f;
+
+	//m_viewport = viewport;
+	////Set the Viewport
+	//m_d3dDevContext->RSSetViewports(1, &viewport);
 }
 
 void GraphicViewer::paintEvent(QPaintEvent *event)
@@ -415,15 +419,16 @@ void GraphicViewer::UpdateScene(double deltaTime)
 
 void GraphicViewer::RenderScene()
 {
-	m_d3dDevContext->RSSetViewports(1, &m_viewport);
-	m_d3dDevContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
+	//m_d3dDevContext->RSSetViewports(1, &m_viewport);
+	//m_d3dDevContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
 
-	//Clear our backbuffer
-	float bgColor[4] = { (0.0f, 0.0f, 0.0f, 0.0f) };
-	m_d3dDevContext->ClearRenderTargetView(m_renderTargetView, bgColor);
+	////Clear our backbuffer
+	//float bgColor[4] = { (0.0f, 0.0f, 0.0f, 0.0f) };
+	//m_d3dDevContext->ClearRenderTargetView(m_renderTargetView, bgColor);
 
-	//Refresh the Depth/Stencil view
-	m_d3dDevContext->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	////Refresh the Depth/Stencil view
+	//m_d3dDevContext->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	mViewPort.ClearBackbuffer(SimpleMath::Color(0.0f, 0.0f, 0.0f, 0.0f));
 
 	//1
 	//Set the WVP matrix and send it to the constant buffer in effect file
@@ -446,7 +451,8 @@ void GraphicViewer::RenderScene()
 	m_d3dDevContext->DrawIndexed(36, 0, 0);
 
 	//Present the backbuffer to the screen
-	m_swapChain->Present(0, 0);
+	//m_swapChain->Present(0, 0);
+	mViewPort.Present();
 }
 
 void GraphicViewer::CleanUp()
@@ -454,10 +460,12 @@ void GraphicViewer::CleanUp()
 	//释放COM和一些资源
 	//SAFE_RELEASE(m_d3dDevice);
 	//SAFE_RELEASE(m_d3dDevContext);
-	SAFE_RELEASE(m_swapChain);
-	SAFE_RELEASE(m_depthStencilBuffer);
-	SAFE_RELEASE(m_depthStencilView);
-	SAFE_RELEASE(m_renderTargetView);
+
+	//SAFE_RELEASE(m_swapChain);
+	//SAFE_RELEASE(m_depthStencilBuffer);
+	//SAFE_RELEASE(m_depthStencilView);
+	//SAFE_RELEASE(m_renderTargetView);
+
 	SAFE_RELEASE(m_rasterizeState);
 	SAFE_RELEASE(m_squareVertexBuffer);
 	SAFE_RELEASE(m_squareIndiceBuffer);
