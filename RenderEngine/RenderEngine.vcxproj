@@ -167,6 +167,7 @@
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Spatial.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="ViewPort.h" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +189,7 @@
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Spatial.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="ViewPort.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

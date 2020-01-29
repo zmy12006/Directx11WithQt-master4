@@ -1,5 +1,6 @@
 #pragma once
-class Geometry
+#include "Spatial.h"
+class Geometry : public Spatial
 {
 };
 
