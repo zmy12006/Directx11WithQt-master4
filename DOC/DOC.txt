@@ -1,0 +1,58 @@
+Skeleton
+particle
+lingtmapBake
+pbr
+
+bloom, HDR, Radiosity GI bake
+K:\GameDev\LightMapBake\RADIOSITY\RadiosityDX11
+
+PBR（material）, IBL (neat)
+K:\GameDev\Material\ImageBaseLighting\PhysicallyBasedRendering-master_
+
+AO, post processing
+K:\GameDev\GlobalIllumination\ASSAO-master
+
+Lightmap(radiosity),LightProbe in Urho3D
+K:\GameDev\LightMapBake\Urho3D-Lightmap-master\Urho3D-1.7\Source\Samples\78_Lightmap
+K:\GameDev\LightMapBake\Urho3D-Lightmap-master\Urho3D-1.7\Source\Samples\77_LightProbe
+
+Radiosity Lightmap bake, single file (opengl)
+K:\GameDev\LightMapBake\lightmapper-master\example
+
+Raytrace lightmap bake (dx11)
+K:\GameDev\LightMapBake\BakingLab-master0919\BakingLab-master
+
+MSAA and TXAA
+K:\GameDev\AntiAliasing\MSAAFilter\MSAAFilter
+
+PBR SSAO  IBL
+K:\GameDev\Material\VQEngine_DX11_master\VQEngine-master
+
+FBX Blend shape and skeleton animation
+K:\GameDev\Skeleton\EngineMobileMorph\c3dEngine2-masterfull1\c3dEngine2-master
+
+ColorGrading, Luts, ToneMapping
+K:\GameDev\PostProcessing\ColorGradingFilter-Sample-master
+
+Shader tool(glsl hlsl), debug(step by step)
+K:\GameDev\PostProcessing\SHADERRED
+
+postprocess collection
+K:\GameDev\PostProcessing\RESHADE
+
+Cascaded shadow map，ssr, gbuffer（rgb, normal, depth...)
+K:\GameDev\Material\SDEngine-masterNew\SDEngine-master
+
+可参考引擎
+2020/3/16 15:00:40
+https://github.com/gameplay3d/GamePlay
+2020/3/16 15:04:12
+一本正经 2020/3/16 15:04:12
+https://github.com/gameplay3d/GamePlay
+2020/3/16 15:12:30
+一本正经 2020/3/16 15:12:30
+https://github.com/rokups/rbfx
+2020/3/16 15:15:49
+一本正经 2020/3/16 15:15:49
+https://github.com/nem0/LumixEngine
+2020/3/16 23:00:11
